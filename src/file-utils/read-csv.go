@@ -8,17 +8,17 @@ import (
 )
 
 type UserData struct {
-	user_id string
-	currency string
-	timestamp float64
-	delta float64
+	UserId string
+	Currency string
+	Timestamp int64
+	Delta float64
 }
 
 
 type MarketData struct {
-	symbol string
-	timestamp float64
-	price float64
+	Symbol string
+	Timestamp int64
+	Price float64
 }
 
 
@@ -31,10 +31,10 @@ func ReadUserData(data_type string) []UserData {
 		if i == 0 {
 			continue
 		}
-		user_data[i-1].user_id = row[0]
-		user_data[i-1].currency = row[1]
-		user_data[i-1].timestamp, _ = strconv.ParseFloat(row[2], 64)
-		user_data[i-1].delta, _ = strconv.ParseFloat(row[3], 64)
+		user_data[i-1].UserId = row[0]
+		user_data[i-1].Currency = row[1]
+		user_data[i-1].Timestamp, _ = strconv.ParseInt(row[2], 10, 64)
+		user_data[i-1].Delta, _ = strconv.ParseFloat(row[3], 64)
 	} 
 	return user_data
 }
@@ -49,9 +49,9 @@ func ReadMarketData(data_type string) []MarketData {
 		if i == 0 {
 			continue
 		}
-		market_data[i-1].symbol = row[0]
-		market_data[i-1].timestamp, _ = strconv.ParseFloat(row[1], 64)
-		market_data[i-1].price, _ = strconv.ParseFloat(row[2], 64)
+		market_data[i-1].Symbol = row[0]
+		market_data[i-1].Timestamp, _ = strconv.ParseInt(row[1], 10, 64)
+		market_data[i-1].Price, _ = strconv.ParseFloat(row[2], 64)
 	}
 	return market_data
 }
