@@ -15,16 +15,17 @@ type UserData struct {
 }
 
 
+type MarketData struct {
+	symbol string
+	timestamp float64
+	price float64
+}
+
+
 func ReadUserData(data_type string) []UserData {
-	file, err := os.Open(fmt.Sprintf("./data/%s/user_data.csv", data_type))
-	if err != nil {
-		fmt.Println("error in opening the file")
-	}
+	file, _ := os.Open(fmt.Sprintf("./data/%s/user_data.csv", data_type))
 	reader := csv.NewReader(file)
-	all_rows, err := reader.ReadAll()
-	if err != nil {
-		fmt.Println("error in the reader")
-	}
+	all_rows, _ := reader.ReadAll()
 	user_data := make([]UserData, len(all_rows)-1)
 	for i, row := range all_rows {
 		if i == 0 {
@@ -32,14 +33,25 @@ func ReadUserData(data_type string) []UserData {
 		}
 		user_data[i-1].user_id = row[0]
 		user_data[i-1].currency = row[1]
-		user_data[i-1].timestamp, err = strconv.ParseFloat(row[2], 64)
-		if err != nil {
-			fmt.Printf("error in the timestamp, line %d, %e", i, err)
-		}
-		user_data[i-1].delta, err = strconv.ParseFloat(row[3], 64)
-		if err != nil {
-			fmt.Printf("error in the delta, line %d, %e", i, err)
-		}
+		user_data[i-1].timestamp, _ = strconv.ParseFloat(row[2], 64)
+		user_data[i-1].delta, _ = strconv.ParseFloat(row[3], 64)
 	} 
 	return user_data
+}
+
+
+func ReadMarketData(data_type string) []MarketData {
+	file, _ := os.Open(fmt.Sprintf("./data/%s/market_data.csv", data_type))
+	reader := csv.NewReader(file)
+	all_rows, _ := reader.ReadAll()
+	market_data := make([]MarketData, len(all_rows)-1)
+	for i, row := range all_rows {
+		if i == 0 {
+			continue
+		}
+		market_data[i-1].symbol = row[0]
+		market_data[i-1].timestamp, _ = strconv.ParseFloat(row[1], 64)
+		market_data[i-1].price, _ = strconv.ParseFloat(row[2], 64)
+	}
+	return market_data
 }
