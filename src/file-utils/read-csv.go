@@ -5,28 +5,17 @@ import (
 	"os"
 	"fmt"
 	"strconv"
+	"slavka-test/src/structs"
 )
 
-type UserData struct {
-	UserId string
-	Currency string
-	Timestamp int64
-	Delta float64
-}
 
 
-type MarketData struct {
-	Symbol string
-	Timestamp int64
-	Price float64
-}
 
-
-func ReadUserData(data_type string) []UserData {
+func ReadUserData(data_type string) []structs.UserData {
 	file, _ := os.Open(fmt.Sprintf("./data/%s/user_data.csv", data_type))
 	reader := csv.NewReader(file)
 	all_rows, _ := reader.ReadAll()
-	user_data := make([]UserData, len(all_rows)-1)
+	user_data := make([]structs.UserData, len(all_rows)-1)
 	for i, row := range all_rows {
 		if i == 0 {
 			continue
@@ -40,11 +29,11 @@ func ReadUserData(data_type string) []UserData {
 }
 
 
-func ReadMarketData(data_type string) []MarketData {
+func ReadMarketData(data_type string) []structs.MarketData {
 	file, _ := os.Open(fmt.Sprintf("./data/%s/market_data.csv", data_type))
 	reader := csv.NewReader(file)
 	all_rows, _ := reader.ReadAll()
-	market_data := make([]MarketData, len(all_rows)-1)
+	market_data := make([]structs.MarketData, len(all_rows)-1)
 	for i, row := range all_rows {
 		if i == 0 {
 			continue
