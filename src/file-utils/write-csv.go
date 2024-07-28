@@ -11,6 +11,7 @@ import (
 
 
 func convert_answer_to_strings(answer structs.AnswerData, users_map map[string]int, time_util index_utils.TimestampUtil) [][]string {
+	/* Converts the special AnswerData object to the object list of list of strings */
 	users_list := index_utils.GetInverseStringMap(users_map)
 	dim1 := len(answer)
 	dim2 := 5
@@ -35,6 +36,7 @@ func convert_answer_to_strings(answer structs.AnswerData, users_map map[string]i
 
 
 func WriteAnswerData(answer structs.AnswerData, users_map map[string]int, time_util index_utils.TimestampUtil) {
+	/* Write the AnswerData structure to the file */
 	strings := convert_answer_to_strings(answer, users_map, time_util)
 	writer := csv.NewWriter()
 

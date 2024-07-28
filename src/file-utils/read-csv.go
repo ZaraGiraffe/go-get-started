@@ -12,6 +12,7 @@ import (
 
 
 func ReadUserData(data_type string) []structs.UserData {
+	/* This function reads the user data to the special type */
 	file, _ := os.Open(fmt.Sprintf("./data/%s/user_data.csv", data_type))
 	reader := csv.NewReader(file)
 	all_rows, _ := reader.ReadAll()
@@ -30,6 +31,7 @@ func ReadUserData(data_type string) []structs.UserData {
 
 
 func ReadMarketData(data_type string) []structs.MarketData {
+	/* This function reads the market data to the special type */
 	file, _ := os.Open(fmt.Sprintf("./data/%s/market_data.csv", data_type))
 	reader := csv.NewReader(file)
 	all_rows, _ := reader.ReadAll()

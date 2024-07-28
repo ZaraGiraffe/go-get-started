@@ -10,6 +10,7 @@ import (
 
 
 func OneProcessSolver(interval int64) {
+	/* This is the solver that solves the task using one process without any optimizations */
 	user_data := file_utils.ReadUserData("big")
 	market_data := file_utils.ReadMarketData("small")
 
