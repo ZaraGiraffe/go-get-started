@@ -1,5 +1,10 @@
 package structs
 
+import (
+	"slavka-test/src/constants"
+)
+
+
 type UserCurrentData struct {
 	BalanceInCurrency []float64
 	BalanceInUSD float64
@@ -11,15 +16,25 @@ type AnswerDataUnit struct {
 	AverageBalance float64
 }
 
-type AnswerData = [][]AnswerDataUnit
+type AnswerData = struct {
+	/* For every user, For every timestamp saves the answer */
+	Content [][]AnswerDataUnit
+	Type constants.IntervalParam
+}
 
-func InitAnswerData(num_users int, num_timestamp int) AnswerData {
-	answer_data := make([][]AnswerDataUnit, num_users)
+
+func InitAnswerData(num_users int, num_timestamp int, interval constants.IntervalParam) AnswerData {
+	content := make([][]AnswerDataUnit, num_users)
 	for i := range num_users {
-		answer_data[i] = make([]AnswerDataUnit, num_timestamp)
+		content[i] = make([]AnswerDataUnit, num_timestamp)
+	}
+	answer_data := AnswerData {
+		content, 
+		interval,
 	}
 	return answer_data
 }
+
 
 func InitUserCurrentData(num_users int) UserCurrentData {
 	cur_data := UserCurrentData{
@@ -28,4 +43,3 @@ func InitUserCurrentData(num_users int) UserCurrentData {
 	}
 	return cur_data
 }
-
