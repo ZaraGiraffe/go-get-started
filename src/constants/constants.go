@@ -7,15 +7,19 @@ import (
 
 type IntervalParam int64
 
-const HOUR IntervalParam = 60 * 60
-const DAY IntervalParam = HOUR * 24
-const MONTH IntervalParam = DAY * 30
+const (
+	HOUR IntervalParam = 60 * 60
+	DAY IntervalParam = HOUR * 24
+	MONTH IntervalParam = DAY * 30
+)
 
 type SizeParam string
 
-const BIG SizeParam = "big"
-const SMALL SizeParam = "small"
-const MEDIUM SizeParam = "medium"
+const (
+	BIG SizeParam = "big"
+	SMALL SizeParam = "small"
+	MEDIUM SizeParam = "medium"
+)
 
 
 func ConvertIntervalToPath(interval IntervalParam, size SizeParam) string {
