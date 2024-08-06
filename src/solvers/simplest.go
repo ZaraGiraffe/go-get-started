@@ -2,9 +2,9 @@ package solvers
 
 import (
 	"fmt"
-	"slavka-test/src/data-utils"
-	"slavka-test/src/file-utils"
-	"slavka-test/src/index-utils"
+	"slavka-test/src/utils/data"
+	"slavka-test/src/utils/file"
+	"slavka-test/src/utils/index"
 	"slavka-test/src/structs"
 	"slavka-test/src/constants"
 )

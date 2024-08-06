@@ -4,7 +4,7 @@ import (
 	"os"
 	"fmt"
 	"slavka-test/src/structs"
-	"slavka-test/src/index-utils"
+	"slavka-test/src/utils/index"
 )
 
 
