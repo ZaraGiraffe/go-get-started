@@ -47,3 +47,15 @@ func (t *TimestampUtil) IndexToTimestamp(index int) (int64, error) {
 	}
 	return int64(index) * t.interval + t.min_timestamp, nil
 }
+
+func (t *TimestampUtil) GetLeftTimestamp(timestamp int64) int64 {
+	/* get nearest left interval point */
+	difference := timestamp - t.min_timestamp
+	if difference >= 0 {
+		return t.min_timestamp + difference - (difference % t.interval)
+	} else if difference % t.interval == 0 {
+		return t.min_timestamp + difference 
+	} else {
+		return t.min_timestamp + difference + (-difference % t.interval)
+	}
+}

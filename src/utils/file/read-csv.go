@@ -2,18 +2,19 @@ package file_utils
 
 import (
 	"encoding/csv"
-	"os"
 	"fmt"
-	"strconv"
+	"os"
+	"slavka-test/src/constants"
 	"slavka-test/src/structs"
+	"strconv"
 )
 
 
 
 
-func ReadUserData(data_type string) []structs.UserData {
+func ReadUserData(size_param constants.SizeParam) []structs.UserData {
 	/* This function reads the user data to the special type */
-	file, _ := os.Open(fmt.Sprintf("./data/%s/user_data.csv", data_type))
+	file, _ := os.Open(fmt.Sprintf("./data/%s/user_data.csv", string(size_param)))
 	reader := csv.NewReader(file)
 	all_rows, _ := reader.ReadAll()
 	user_data := make([]structs.UserData, len(all_rows)-1)
@@ -30,9 +31,9 @@ func ReadUserData(data_type string) []structs.UserData {
 }
 
 
-func ReadMarketData(data_type string) []structs.MarketData {
+func ReadMarketData(size_param constants.SizeParam) []structs.MarketData {
 	/* This function reads the market data to the special type */
-	file, _ := os.Open(fmt.Sprintf("./data/%s/market_data.csv", data_type))
+	file, _ := os.Open(fmt.Sprintf("./data/%s/market_data.csv", string(size_param)))
 	reader := csv.NewReader(file)
 	all_rows, _ := reader.ReadAll()
 	market_data := make([]structs.MarketData, len(all_rows)-1)

@@ -35,3 +35,6 @@ func ConvertIntervalToPath(interval IntervalParam, size SizeParam) string {
 	path := fmt.Sprintf("./data/%s/example-output/bars-%s.csv", size, interval_string)
 	return path
 }
+
+
+const INF64 int64 = 9223372036854775807
