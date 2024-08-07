@@ -18,7 +18,7 @@ func WriteAnswerData(answer structs.AnswerData, users_map map[string]int, time_u
 	for i, data_unit_1d := range answer.Content {
 		for j, data_unit := range data_unit_1d {
 			timestamp, _ := time_util.IndexToTimestamp(j)
-			output_string := fmt.Sprintf("%s,%f,%f,%f,%d",
+			output_string := fmt.Sprintf("%s,%f,%f,%f,%d\n",
 			 user_ids[i], data_unit.MinimumBalance, data_unit.MaximumBalance, data_unit.AverageBalance, timestamp)
 			file.WriteString(output_string)
 		}
