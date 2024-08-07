@@ -45,8 +45,9 @@ func OneProcessSolver(interval_param constants.IntervalParam, size_param constan
 		if ptr_market_data < len(market_data) {
 			market_data_time = market_data[ptr_market_data].Timestamp
 		}
-
-		cur_timestamp := time_util.GetLeftTimestamp(min(user_data_time, market_data_time))
+		
+		cur_time := min(user_data_time, market_data_time)
+		cur_timestamp := time_util.GetLeftTimestamp(cur_time)
 		for ; cur_timestamp >= next_timestamp; next_timestamp += interval {
 			index_timestamp, _ := time_util.TimestampToIndex(next_timestamp)
 			for _, v := range users_map {
@@ -70,7 +71,7 @@ func OneProcessSolver(interval_param constants.IntervalParam, size_param constan
 					answer_unit.MinimumBalance = new_balance
 				}
 				answer_unit.AverageBalance += (new_balance - cur_user_data.BalanceInUSD) * 
-					float64(time_util.GetRightTimestamp(user_data_time) - user_data_time) / float64(interval)
+					float64(time_util.GetRightTimestamp(cur_time) - cur_time) / float64(interval)
 			}
 			cur_user_data.BalanceInUSD = new_balance
 		}
