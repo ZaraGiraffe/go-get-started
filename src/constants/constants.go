@@ -32,7 +32,7 @@ func ConvertParamsToPath(interval IntervalParam, size SizeParam) string {
 		interval_string = "30d"
 	}
 
-	path := fmt.Sprintf("./data/%s/example-output/bars-%s.csv", size, interval_string)
+	path := fmt.Sprintf("./data/%s/output/bars-%s.csv", size, interval_string)
 	return path
 }
 
