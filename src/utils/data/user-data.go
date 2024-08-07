@@ -3,7 +3,6 @@ package data_utils
 
 import (
 	"slavka-test/src/structs"
-	"golang.org/x/exp/maps"
 )
 
 
@@ -21,7 +20,11 @@ func GetListOfUsers(user_data []structs.UserData) []string {
 	for _, row := range user_data {
 		user_map[row.UserId] = true
 	}
-	return maps.Keys(user_map)
+	users := make([]string, 0, len(user_map))
+	for k := range user_map {
+		users = append(users, k)
+	}
+	return users
 }
 
 func GetListOfCurrenciesAndPrices(user_data []structs.UserData) ([]string, []string) {
@@ -30,10 +33,11 @@ func GetListOfCurrenciesAndPrices(user_data []structs.UserData) ([]string, []str
 	for _, row := range user_data {
 		user_map[row.Currency] = true
 	}
-	currencies := maps.Keys(user_map)
-	prices := make([]string, len(currencies))
-	for i := 0; i < len(currencies); i++ {
-		prices[i] = prices[i] + "USD"
+	currencies := make([]string, 0, len(user_map))
+	prices := make([]string, 0, len(user_map))
+	for k := range user_map {
+		currencies = append(currencies, k)
+		prices = append(prices, k + "USD")
 	}
 	return currencies, prices
 }

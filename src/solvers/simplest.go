@@ -50,14 +50,15 @@ func OneProcessSolver(interval_param constants.IntervalParam, size_param constan
 		for ; cur_timestamp >= next_timestamp; next_timestamp += interval {
 			index_timestamp, _ := time_util.TimestampToIndex(cur_timestamp)
 			for _, v := range users_map {
-				answer.Content[v][index_timestamp].AverageBalance = cur_users_data[v].BalanceInUSD
-				answer.Content[v][index_timestamp].MaximumBalance = cur_users_data[v].BalanceInUSD
-				answer.Content[v][index_timestamp].MinimumBalance = cur_users_data[v].BalanceInUSD
+				answer_unit := &answer.Content[v][index_timestamp]
+				answer_unit.AverageBalance = cur_users_data[v].BalanceInUSD
+				answer_unit.MaximumBalance = cur_users_data[v].BalanceInUSD
+				answer_unit.MinimumBalance = cur_users_data[v].BalanceInUSD
 			}
 		}
 
 		updateUser := func(user_id int) {
-			cur_user_data := cur_users_data[user_id]
+			cur_user_data := &cur_users_data[user_id]
 			new_balance := cur_user_data.RecalculateUSDBalance(cur_currencies_prices)
 			index_timestamp, err := time_util.TimestampToIndex(cur_timestamp)
 			if err == nil {
@@ -75,7 +76,7 @@ func OneProcessSolver(interval_param constants.IntervalParam, size_param constan
 		}
 
 		if user_data_time < market_data_time {
-			user_data_unit := user_data[ptr_user_data]
+			user_data_unit := &user_data[ptr_user_data]
 			user_id := users_map[user_data_unit.UserId]
 			cur_user_data := cur_users_data[user_id]
 			currency_id := currency_map[user_data_unit.Currency]
@@ -83,7 +84,7 @@ func OneProcessSolver(interval_param constants.IntervalParam, size_param constan
 			updateUser(user_id)
 			ptr_user_data += 1
 		} else {
-			market_data_unit := market_data[ptr_market_data]
+			market_data_unit := &market_data[ptr_market_data]
 			price_id := prices_map[market_data_unit.Symbol]
 			cur_currencies_prices[price_id] = market_data_unit.Price
 			for user_id := 0; user_id < len(cur_users_data); user_id++ {
