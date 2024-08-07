@@ -1,12 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"slavka-test/src/constants"
+	"slavka-test/src/solvers"
 )
 
 
 func main() {
-    path := constants.ConvertIntervalToPath(constants.DAY, constants.MEDIUM)
-    fmt.Printf(path)
+	solvers.OneProcessSolver(constants.DAY, constants.SMALL)
 }
