@@ -19,7 +19,7 @@ func OneProcessSolver(interval_param constants.IntervalParam, size_param constan
 	min_timestamp, max_timestamp := data_utils.GetMinMaxTimestamp(user_data, market_data, interval)
 	users := data_utils.GetListOfUsers(user_data)
 	currencies, prices := data_utils.GetListOfCurrenciesAndPrices(user_data)
-	answer := structs.InitAnswerData(len(users), int((min_timestamp - max_timestamp) / interval), interval_param)
+	answer := structs.InitAnswerData(len(users), int((max_timestamp - min_timestamp) / interval), interval_param)
 	cur_users_data := structs.InitUserCurrentData(len(users), len(currencies))
 
 	currency_map := index_utils.GetStringMap(currencies)
@@ -93,5 +93,6 @@ func OneProcessSolver(interval_param constants.IntervalParam, size_param constan
 		}
 	}
 
-	file_utils.WriteAnswerData(answer, users_map, time_util)
+	file_path := constants.ConvertParamsToPath(interval_param, size_param)
+	file_utils.WriteAnswerData(answer, users_map, time_util, file_path)
 }

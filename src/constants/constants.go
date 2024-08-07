@@ -22,7 +22,7 @@ const (
 )
 
 
-func ConvertIntervalToPath(interval IntervalParam, size SizeParam) string {
+func ConvertParamsToPath(interval IntervalParam, size SizeParam) string {
 	var interval_string string
 	if interval == HOUR {
 		interval_string = "1h"

@@ -9,10 +9,10 @@ import (
 
 
 
-func WriteAnswerData(answer structs.AnswerData, users_map map[string]int, time_util index_utils.TimestampUtil) {
+func WriteAnswerData(answer structs.AnswerData, users_map map[string]int, time_util index_utils.TimestampUtil, file_path string) {
 	user_ids := index_utils.GetInverseStringMap(users_map)
 
-	file, _ := os.Create("./")
+	file, _ := os.Create(file_path)
 	file.WriteString("user_id,minimum_balance,maximum_balance,average_balance,start_timestamp\n")
 
 	for i, data_unit_1d := range answer.Content {
