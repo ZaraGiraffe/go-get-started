@@ -4,6 +4,8 @@ Repo where I start learning Go language by solving this [task](https://drive.goo
 
 ### how to run
 
+Create folder with the name "output" next to "example-output" in every folder in data.  
+In main.go choose with task to run. Then:
 ```
 $ go run main.go
 ```
